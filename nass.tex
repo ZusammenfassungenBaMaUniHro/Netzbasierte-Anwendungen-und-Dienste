@@ -27,8 +27,8 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 
-\chapter{Kapitel 1 Introduction}
-\section{Taxonomie der Angreifer}
+\section{Introduction}
+\subsection{Taxonomie der Angreifer}
 \begin{itemize}
 	\item einzelner Angreifer
     
@@ -69,7 +69,7 @@
     \end{itemize}
 \end{itemize}
 
-\section{Angriffe gegen einen Computer}
+\subsection{Angriffe gegen einen Computer}
 Informationsdiebstahl führt zu:
 \begin{itemize}
 	\item Wettbewerbsvorteilen
@@ -178,8 +178,8 @@ Session Highjacking
 
 ZSF: viele unterschiedliche Angriffsmöglichkeiten \Rightarrow unüberschaubare Anzahl an verschiedenen Attacken
 Angreifer unterscheiden sich in Motivation und Möglichkeiten.
-\chapter{Kapitel 2 - Einführung und Rekapitulation}
-\section{Sicherheitskomponenten}
+\section{Einführung und Rekapitulation}
+\subsection{Sicherheitskomponenten}
 \begin{itemize}
 	\item Firewalls
     \item Intrusion Detection/Prevention Systems
@@ -187,7 +187,7 @@ Angreifer unterscheiden sich in Motivation und Möglichkeiten.
     \item interne oder private Netzwerke / Netzwerkzonen / Entmilitarisierte Zonen
     \item VPNs
 \end{itemize}
-\section{Firewalls}
+\subsection{Firewalls}
 entscheidet ob Verkehr ins Netzwerk gelangen darf oder nicht
 Typen: 
 \begin{itemize}
@@ -195,7 +195,7 @@ Typen:
     \item Zustandsbehaftete Firewall
     \item Proxyfirewall
 \end{itemize}
-\section{Intrusion Detection Systems}
+\subsection{Intrusion Detection Systems}
 Identifizierung von Attacken / verdächtigem Verkehr \\
 Hilfe beim Einrichten/ konfigurieren von Firewalls \\
 Normalerweise transparent für Nutzer und Angreifer.\\
@@ -204,23 +204,23 @@ hauptsächlich 2 Arten:
 	\item Mustererkennung
     \item Anomalieerkennung
 \end{itemize}
-\section{Proxies}
+\subsection{Proxies}
 strickte Trennung von internen und externen Netz\\
 Üblicherweise auf Application Layer. Verhindert dass bestimmte Informationen(Viren, Pornos, illegale Infos) in das interne Netz gesandt werden.\\
 Verhindert, dass bestimmte Informationen nach außen gesendet werden.\\
 Kombinationen mit anderen Systemen(Virenfilter/ Spamfilter / IDS...)\\
-\section{VPN}
+\subsection{VPN}
 VPNs erschaffen einen gemeinsamen Addressraum.\\
 VPNs schützen die Kommunikation über ungesicherte Netzwerke als würde sie in einem Netzwerk stattfinden.\\
 Gegenseitige Authentifizierung der Kommunikationspartner.\\
 VPNs bieten signifikante Einsparungen über dedizierte Verbindungen.
-\section{Zonen - DMZ}
+\subsection{Zonen - DMZ}
 kleine Netzwerke, welche öffentlich erreichbare Dienste beeinhalten (z.B. HTTP)\\
 DMZ oft durch Firewalls etc geschützt.\\
 DMZ befinden sich außerhalb des internen Netzes.\\
 sind unsicherer als das interne Netz.\\
 Abgeschirmte Teilnetze sind isolierte Netze innerhalb des internen Netzes
-\section{internes Netz}
+\subsection{internes Netz}
 eingeschränkter Zugriff auf das externe Netz nur über gut bekannte Ports\\
 Internes Angriffsrisiko hängt ab von:
 \begin{itemize}
@@ -230,45 +230,45 @@ Internes Angriffsrisiko hängt ab von:
     \item Fähigkeiten der Nutzer
 \end{itemize}
 Hosts müssen trotzdem noch mit firewalls etc geschützt werden
-\section{Basis Kryptografie}
+\subsection{Basis Kryptografie}
 Kerkhoff's Prinzip: Sicherheit hängt nur von Schlüssel ab und nicht von der Kenntnis der kryptografischen Funktion.\\
-\subsection{symmetrische Verschlüsselung}
+\subsubsection{symmetrische Verschlüsselung}
 Beide Teilnehmer benutzen zum ver- und entschlüsseln denselben Schlüssel.\\
 Stromchiffren: Klartext wird Zeichen für Zeichen ver- und entschlüsselt.\\
 Blockchiffren: arbeitet mit festen Blockgrößen und entschlüsselt mehrere Zeichen in einem Schritt.\\
-\subsubsection{One-Time Pads}
+\paragraph{One-Time Pads}
 Stromchiffre deren Schlüsselstrom ein Strom aus echten Zufallsbits ist\\
 Uneingeschränkt sicher(einziges bisher "`bewiesen"' sicheres Verfahren).\\
 Schlüssel muss zu verschlüsseln mindestens so lang sein wie der Klartext.\\
 Jeder Schlüssel darf nur einmal verwendet werden.\\
 Nachteil: viel Speicherbedarf für Schlüssel.\\
-\subsection{asymmetrische Verschlüsselung}
+\subsubsection{asymmetrische Verschlüsselung}
 Sender und Empfänger nutzen jeweils unterschiedliche Schlüssel.\\
 Es ist schwierig den Entschlüsselungsschlüssel(k') aus dem Verschlüsselungsschlüsselungsschlüssel(k) zu berechnen\\
 k kann öffentlich gemacht werden (public-key-Verschlüsselung).\\
 Nachteil: Verteilung der Schlüssel\\
-\subsection{hybride Verschlüsselung}
+\subsubsection{hybride Verschlüsselung}
 Kombination aus symmetrischer udn asymmetrischer Verschlüsselung.\\
 symmetrischer Session Key mit dem die Daten symmetrisch verschlüsselt werden.\\
 Session Key wird asymmetrisch mit public Key des Empfängers verschlüsselt.\\
 löst Verteilungsproblem der asymmetrischen und behält Geschwidigkeit der symmetrischen Verschlüsselung\\
-\subsection{kryptografische Hashfunktion}
+\subsubsection{kryptografische Hashfunktion}
 Anforderungen:
 \begin{itemize}
 	\item einseitig: wenn Hashwert y gegeben ist, ist es rechnerisch unmöglich eine Nachricht x zu finden, sodass h(x) = y
     \item schwacher Kollisionswiderstand: bei gegebener Nachricht ist es rechnerisch unmöglich eine andere Nachricht mit gleichem Hashwert zu finden
     \item starker Kollisionwiderstand: Es is rechnerisch unmöglich zwei Nachrichten mit gleichem Hashwert zu finden.
 \end{itemize}
-\subsubsection{Hash und Signaturen}
+\paragraph{Hash und Signaturen}
 Von Nachricht wird Hash gebildet. Dieser wird verschlüsselt und als Signatur an die Nachricht gehängt.\\
 Empfänger entschlüsselt Signatur mit public key des Senders und vergleicht mit dem hash der Nachricht. Wenn gleich dann ist alles gut, wenn nicht dann wurde was verändert.\\
-\subsection{Diffie-Hellman Schlüsselaustausch}
+\subsubsection{Diffie-Hellman Schlüsselaustausch}
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.50\textwidth]{C:/Users/Basti/git/Netzbasierte-Anwendungen-und-Dienste/diffiehellman.JPG}
 	\label{fig:diffiehellman}
 \end{figure}
-\subsection{Zertifikate}
+\subsubsection{Zertifikate}
 Zertifikat ist eine Datenstruktur welche folgendes enthält:
 \begin{itemize}
 	\item Öffentlichen Schlüssel
@@ -279,10 +279,89 @@ Zertifikat ist eine Datenstruktur welche folgendes enthält:
     \item Möglicherweise andere Daten
     \item Signatur des Ausstellers
 \end{itemize}
-\subsection{Certification Authorities (CA)}
+\subsubsection{Certification Authorities (CA)}
 stellen Zertifikate aus.\\
 sind normalerweise vertrauenswürdige Dritte.\\
 Zertifikate werden über online Datenbanken verteilt(Certificate Directories) denen vertraut werden muss.
+\section{Paketfilter}
+ \subsection{Funktionsweise von Paketfiltern}
+Netzwerkpakete werden akzeptiert oder zurückgewiesen anhand von Parametern wie:
+\begin{itemize}
+	\item Quelladresse/Ports
+    \item Zieladresse/Ports
+    \item Flags
+\end{itemize}
+\subsection{Paketfilterregeln}
+Regeln können bzgl Flags, Adressen und Ports angewandt werden.\\
+Paketfilter können auch bezüglich des Inhaltes von Paketen angewandt werden.\\
+Zulassende Regeln:
+\begin{itemize}
+	\item explizites Erlauben von Zugriff
+    \item sämtlicher anderer Verkehr wird verhindert
+\end{itemize}
+Verhindernde/ablehnende Regeln:
+\begin{itemize}
+	\item bestimmter Verkehr wird explizit abgelehnt.
+    \item sämtlicher anderer Verkehr wird für gewöhnlich zugelassen.
+\end{itemize}
+Wichtig:
+\begin{itemize}
+	\item Reihenfolge der Regeln ist wichtig.(erst alles verhindern und dann einige zulassen ist was anderes als erst einige zulassen und dann alles zu verhindern!)
+    \item große Anzahl an Regeln kann verwirrend sein.
+    \item "`alles verbieten und solange es nicht explizit benötigt wird"' kann gute Herangehensweise sein.
+\end{itemize}
+\subsubsection{Ingress-Filter}
+Filtern ankommende Pakete\\
+blockieren Zugriff von verdächtigen Quelladdressen.\\
+ \subsubsection{Egress-Filter}
+Filtern ausgehenden Verkehr.\\
+Nur Pakete mit Quelladdresse im Netzwerk dürfen das Netzwerk verlassen so lange keine andere Regel greift.\\
+Quellen von abgewiesenen Paketen sind gute Kandidaten für Überprüfung.\\
+\subsubsection{Protokollfilter}
+Dienste haben haben festgelegte Protokolle\\
+Daumenregel: nur Verkehr zu Diensten zulassen die wirklich benötigt werden.\\
+\subsubsection{Probleme}
+Zugriff für bestimmte Netze zulassen\\
+Gefahr des Spoofings: Angreifer nutzt evtl falsche Quelladressen\\
+Source Routing: 
+\begin{itemize}
+	\item Pakete enthalten evtl Infos über die Route zurück zum Urheber
+    \item Überschreiben die Routingtabelle des Routers
+\end{itemize}
+Gefahr das Filterregeln umgangen werden\\
+Fragmentierung:
+\begin{itemize}
+	\item Paketfilter untersuchen Headerinfos
+    \item Paket wird so aufgeteilt dass der Header geteilt wird und Adresse und Ports nicht gefiltert werden können.
+\end{itemize}
+Löcher:
+\begin{itemize}
+	\item Dienste müssen erreichbar bleiben für externe Netzwerke
+    \item entsprechende Ports müssen geöffnet werden.
+\end{itemize}
+\subsection{dynamische Paketfilter}
+Filterregeln werden on the fly so erstellt wie sie benötigt werden und nach schließen der Verbindung wieder gelöscht.\\
+Filter beobachten ausgehenden Verkehr und erstellen zurückwirkende Regeln.(Ausgehender Verkehr zu einer Adresse bewirkt Regel dass eingehender Verkehr von dieser Adresse erlaubt wird.)\\
+Probleme: 
+\begin{itemize}
+	\item Regeln sind angreifbar z.B. durch senden falscher reset Pakete
+    \item ausgehender Verkehr wird nicht gefiltert. Gefahr von Trojanern/Viren.
+\end{itemize}
+\section{Zustandsbehaftete Fierwalls}
+\subsection{Funktionsweise}
+Kennen den Zustand von Verbindungen und wissen welche Pakete in welchem Zustand erwartet werden.\\
+Es können Regeln angewandt werden die nur in bestimmten Zuständen wirksam sind.\\
+Untersuchen hauptsächlich  OSI 4 (transport layer), aber auch höhere Schichten.\\
+\subsection{Probleme}
+Hohe Leistung benötigt teilweise geclusterte Hardware. Zustandsbehaftete Firewalls lassen sich nicht einfach clustern.\\
+Zustandslose Protokolle (UDP, ICMP, DNS, HTTP)\\
+\subsubsection{Zustandslose Protokolle}
+Zustandslose Protokolle definieren trotdem welche Pakete erwartet werden.\\
+Timeouts werden genutzt um Pseudo-Verbindungen zu erzeugen.\\
+\subsection{Multi-Layer Inspection}
+Die meisten Protokolle basieren auf Protokollen aus niedrigeren Layern. BSP: HTTP nutzt TCP Verbindungen.\\
+Zustandsbehaftete Firewalls können beide Layer beobachten.\\
 
- 
+
+
 \end{document}
