@@ -374,8 +374,78 @@ Zustandsbehaftete Firewalls können beide Layer beobachten.
 \section{Proxy Firewalls}
 %040_Proxy_Firewalls.pdf
 
-\section{Proxies as firewall servers}
-%050_Proxy_Firewalls.pdf
+\section{Policies}
+%050_Policies.pdf
+\subsection{Was sind Policies?}
+Eine Sicherheitsrichtlinie(security policy) beschreibt was getan werden muss um auf einem Rechner gespeicherte Infos zu schützen.\\
+Richtline definiert was gemacht werden muss und und wie es ausgewertet werden kann.\\
+Werden normalerweise aufgeschrieben.\\
+\subsection{Komplexität von Richtlinien}
+werden von Menschen definiert.\\
+müssen verständlich formuliert sein.\\
+zu komplexe (aber auch zu einfache. bsp "`keine rechner benutzen!"') Richtlinien sind nicht durchsetzbar.\\
+\subsection{Entwicklung von Richtlinien}
+beste Vorgehensweise:
+\begin{itemize}
+	\item Risiken identifizieren
+    
+    \begin{itemize}
+        \item Sicherheitsanalyse
+        
+        \begin{itemize}
+            \item kritische Daten und Systeme identifizieren
+            \item normale Nutzung des Netzwerkes feststellen
+        \end{itemize}
+        \item aufschreiben
+    \end{itemize}
+    \item Funde kommunizieren
+    
+    \begin{itemize}
+        \item Dem Management berichten
+        
+        \begin{itemize}
+            \item einfach
+            \item ausgeglichen
+            \item präzise
+            \item Zeigen auf einzelne vermeiden
+            \item Allgemein halten
+        \end{itemize}
+    \end{itemize}
+    \item Richtlinie erstellen oder aktualisieren
+    
+    \begin{itemize}
+        \item aufschreiben
+        \item Genauheit und Klarheit
+        
+        \begin{itemize}
+            \item Was muss getan werden?
+            \item Warum?
+            \item Wer ist verantwortlich?
+        \end{itemize}
+        \item Knappheit: Niemand liest mehr als 10 Seiten.
+        \item Realismus
+    \end{itemize}
+    \item Einhaltung der Richtline kontrollieren
+    
+    \begin{itemize}
+        \item Wenn die Einhaltung einer Regel nicht kontrolliert werden kann ist sie nicht durchsetzbar
+        \item Stichproben, Log Analysen, Festplattendurchsuchungen
+    \end{itemize}
+    \item Versuchen eine "`Kultur"' zur Einhaltung der Richtlinie einzuführen
+    
+    \begin{itemize}
+        \item Anpassung an die Richtlinie hängt stark vom Verhalten der Nutzer ab
+        \item Mit Nutzern über Risiken sprechen
+        \item Richtlinien vor der Einführung erklären
+        \item Anweisungen und autoritäres Verhalten vermeiden
+    \end{itemize}
+\end{itemize}
+\subsection{ungeschriebene Richtlinien}
+versteckte Regeln existieren.\\
+nutzen des gesunden Menschenverstandes\\
+Versuchen ein Sicherheitsbewusstsein im Betrieb zu etablieren.\\
+Wissen verbreiten, aber vorsichtig und sensibel.
+
 
 \section{Routers}
 %060_Routers.pdf
