@@ -533,6 +533,39 @@ Annahme:
 \begin{itemize}
 	\item Ausreißer befinden sich an den Grenzen des Datenraums und normale Daten im Zentrum.
 \end{itemize}
+\subsection{Abweichungsbasierte Ansätze}
+Idee:
+\begin{itemize}
+	\item Gegeben: Menge von Datenpunkten
+    \item Ausreißer sind Punkte die nicht in die allgemeinen Charakteristiken der Menge passen.
+\end{itemize}
+Annahme:
+\begin{itemize}
+	\item Ausreißer sind die äußersten Punkte der Datenmenge.
+\end{itemize}
+\subsection{Abstandsbasierte Ansätze}
+Idee:
+\begin{itemize}
+	\item Punkte werden basierend auf ihrem Abstand zu ihren Nachbarn bewertet. 
+\end{itemize}
+Annahme:
+\begin{itemize}
+	\item normale Daten haben eine dichte Nachbarschaft
+    \item Ausreißer sind weit von ihren Nachbarn entfernt.
+\end{itemize}
+Beispiel: k-Nearest-Neighbours
+\subsection{Dichtebasierte Ansätze}
+Idee:
+\begin{itemize}
+	\item Vergleiche Dichte um einen Punkt mit der Dichte um seine lokalen Nachbarn
+    \item Die relative Dichte eines Knotens im Vergleich zu der seines Nachbarn wird als Ausreißerwert berechnet.
+    \item Ansätze unterscheiden sich in der Bewertung der Dichte
+\end{itemize}
+Annahme:
+\begin{itemize}
+	\item Die Dichte um normale Daten ist gleich der Dichte um seine Nachbarn.
+    \item Die Dichte um einen Ausreißer ist erheblich anders als die Dichte um seine Nachbarn.
+\end{itemize}
 \section{Honeypots and Tarpits}
 %080_Honeypots_and_Tarpits.pdf
 
