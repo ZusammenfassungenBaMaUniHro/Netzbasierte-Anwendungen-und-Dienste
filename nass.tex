@@ -372,10 +372,10 @@ Zustandsbehaftete Firewalls können beide Layer beobachten.
 
 
 \section{Proxy Firewalls}
-%040_Proxy_Firewalls.pdf
+%050_Proxy_Firewalls.pdf
 
 \section{Policies}
-%050_Policies.pdf
+%060_Policies.pdf
 \subsection{Was sind Policies?}
 Eine Sicherheitsrichtlinie(security policy) beschreibt was getan werden muss um auf einem Rechner gespeicherte Infos zu schützen.\\
 Richtline definiert was gemacht werden muss und und wie es ausgewertet werden kann.\\
@@ -447,114 +447,109 @@ Versuchen ein Sicherheitsbewusstsein im Betrieb zu etablieren.\\
 Wissen verbreiten, aber vorsichtig und sensibel.
 
 
-\section{Routers}
-%060_Routers.pdf
-
-\section{Intrusion Detection Systems}
-%070_IDS.pdf
+\section{Intrusion Detection Systems (IDS)}
 %070_Intrusion_Detection_Systems.pdf
 
-\section{Honeypots}
-%075_Honeypots.pdf
+Sind dazu bestimmt Angriffe zu erkennen und nicht um diese zu verhindern.\\
+Netzwerk IDS Sensor liest Traffic mit uns analysiert diesen indem nach Zeichen für:
+\begin{itemize}
+	\item Scans/Sonden
+    \item Aufklärungsaktivitäten
+    \item Exploits
+\end{itemize}
+Ist normalerweise komplett transparent (nicht zu entdecken).
+\subsection{Motivation}
+Ohne IDS würde ein Admin die meisten Angriffe nicht bemerken und kann auf diese somit nicht reagieren.\\
+Fehlende Infos ohne IDS:
+\begin{itemize}
+	\item Welche Hosts wurden angegriffen?
+    \item Welche Daten wurden kompromittiert?
+    \item Mit welcher Methode wurde angegriffen?
+\end{itemize}
+Nachfolgende Schritte eines Angriffes können verhindert werden.
+\subsection{Methoden- Anomalieerkennung}
+Statistische Analyse um "`unnormalen"' Verkehr erkennen zu können.\\
+Parameter wie Herkunft, Datenrate, Ports und Zeit werden berücksichtigt und gegen eine Statistik geprüft, jedoch nicht nach bestimmten Mustern.\\
+Berechnung der Wahrscheinlichkeit dafür das Verkehr unnormal ist mithilfe von Bayesschen Filtern.\\
+Training der Filter mit Verkehr der als normal betrachtet wird.\\
+Wenn eine bestimmte Grenze überschritten wird, wird Alarm ausgelöst.\\
 
-\section{Virtual Private Networks}
-%080_VPN.pdf
+\subsection{Methoden- Signaturerkennung}
+Analyse von Paketen anhand von gegebenen Mustern.\\
+Adressen und timing Pattern werden berücksichtigt.\\
+bestimmte Mustern lösen einen Alarm aus.
 
-\section{Public Key Infrastructure}
-%090_PKI.pdf
-%100_PKI.pdf
-
-\section{Host security}
-%100_Host_Security.pdf
-
-\section{Security Design}
-%110_Security_Design.pdf
-
-\section{Software}
-%120_Software.pdf
-
-\section{Assessment}
-%130_Assessment.pdf
-
-\section{E-Mail Security}
-%140_E-Mails.pdf
-
-\section{Web Security}
-%160_Webserver.pdf
-
-\section{Prozesse für den Grundschutz}
-%165_Grundschutz.pdf
-
-\section{Trusted Architectures}
-%170_Trusted_Architectures.pdf
-
-\section{Computer Forensics}
-%175_Computer_Forensics.pdf
-
-\section{Computer Forensics – Foundations}
-%176_Forensics_-_Foundations.pdf
-
-\section{Computer Forensics – File System Forensics}
-%177_File_System_Forensics.pdf
-
-\section{Sicherheit von Gebäuden mit IT - Infrastruktur}
-%178_Geb_udesicherheit.pdf
-
-\section{Timers and timing}
-%190_Timing.pdf
-
-\section{Angriffsbäume}
-%200_Attack_trees.pdf
-
-\section{Sicherheit in mobilen Netzwerken}
-%201_Mobile_Networks.pdf
-
-\section{Enterprise Authentication}
-%202_Enterprise_Auth.pdf
-%110_Enterprise_Authentication.pdf
-
-\section{Beispiele}
-%220_Examples.pdf
-
-\section{Data driven security}
-%230_Vorlesung_Data_driven_security.pdf
-
-\section{Database Security}
-%240_Database_Security.pdf
-
-\section{Human Resources Security}
-%250_Human_resources_security.pdf
-
-\section{Securing Mail and HTTP protocols}
-%260_Securing_Mail_and_HTTP.pdf
-
-\section{Ethical Issues of Security Administration}
-%270_Ethical_Issues.pdf
-
-\section{Continuity Planning Disaster Recovery Planning}
-%280_Continuity_Planning.pdf
-
-\section{Advanced Crypto Algorithms}
-%290_Advanced_Algorithms.pdf
-
-\section{Cloud Security Challenges}
-%300_Cloud_Security.pdf
-
-\section{The role of policies in computer security}
-%060_Policies.pdf
-
-\section{Honeypots and tarpits in network security}
+\subsection{Probleme mit IDS}
+Fehlalarme (false positives) und nicht erkannte Alarme (false negatives).\\
+\begin{itemize}
+	\item Viele Fehlalarme werden zu einer bedeutend höheren Ignoranz seitens des Admins führen.
+    \item Reduzierung der false positives führt gewöhnlich zu mehr false negatives.
+    \item IDS Evasion um false positives zu verringern
+    \item Als ersten Filter ein allgemeines Muster Nutzer
+    \item Spezifischere Untersuchung der Pakete die den ersten Filter durchlaufen haben.
+\end{itemize}
+\subsection{Ansätze für IDS}
+globale vs lokale Ansätze:
+\begin{itemize}
+	\item betrachtet die Auflösung der Referenzmenge bezüglich ob ein bestimmtes Datenobjekt als Außenseiter erkannt wurde.
+    \item globale Ansätze:
+    
+    \begin{itemize}
+        \item Referenzmenge enthällt alle Daten.
+        \item Basisannahme: es gibt nur einen normalen Mechanismus (normal mechanism?).
+        \item Problem: andere Ausreißer sind auch in der Menge und können das Ergebnis verfälschen.
+    \end{itemize}
+    \item lokale Ansätze:
+    
+    \begin{itemize}
+        \item Die Referenz enthält lediglich eine Teilmenge der Daten.
+        \item keine Annahme über die Anzahl von normalen Mechanismen (normal mechanism?).
+        \item Problem: Wie fählt man eine geeignete Referenzmenge
+    \end{itemize}
+\end{itemize}
+Einige Ansätze befinden sich irgendwo dazwischen.\\
+Die Auflösung der Referenzmenge kann automatisch oder durch eine Nutzereingabe verändert werden.
+\subsection{Statistische Tests}
+Idee:
+\begin{itemize}
+	\item Gegebene Wahrscheinlichkeitsverteilung (z.B. Gauss)
+    \item Parameter berechnen unter der Annahme, dass alle Datenpunkte durch eine solche Wahrscheinlichkeitsverteilung generiert wurden.
+    \item Ausreißer sind die Punkte, die eine geringe Wahrscheinlichkeit haben von der Verteilung generiert worden zu sein (z.B. weicht mehr als 3 mal von der Standardabweichung ab).
+\end{itemize}
+Annahme:
+\begin{itemize}
+	\item Normale Daten folgen einer Verteilung und treten in einer Region des Models mit hoher Wahrscheinlichkeit auf.
+    \item Ausreißer weichen stark von dieser Verteilung ab.
+\end{itemize}
+Viele verschiedene Tests (unterschiedliche Verteilung, Menge der Variablen, Menge der Verteilungen....)\\
+\subsection{Tiefenbasierte Ansätze}
+Idee:
+\begin{itemize}
+	\item Suche nach Ausreißern an den Grenzen des Datenraums aber unabhängig von Wahrscheinlichkeitsverteilungen.\\
+    \item organisieren Daten in Schichten von konvexen Hüllen
+    \item Ausreißer sind Objekte in äußeren Schichten.
+\end{itemize}
+Annahme:
+\begin{itemize}
+	\item Ausreißer befinden sich an den Grenzen des Datenraums und normale Daten im Zentrum.
+\end{itemize}
+\section{Honeypots and Tarpits}
 %080_Honeypots_and_Tarpits.pdf
 
-\section{Securing hosts and appliances}
+\section{Public Key Infrastructure}
+%100_PKI.pdf
+
+\section{Enterprise Authentication}
+%110_Enterprise_Authentication.pdf
+
+\section{Securing Hosts and Appliances}
 %120_Securing_hosts_and_appliances.pdf
 
-\section{Organizational Aspects of Cyber Defense}
+\section{Organisational Aspects}
 %130_Organisational_Aspects.pdf
 
 \section{Computer Forensics}
 %140_Computer_Forensics.pdf
-
 
 
 \end{document}
