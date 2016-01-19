@@ -373,6 +373,20 @@ Zustandsbehaftete Firewalls können beide Layer beobachten.
 
 \section{Proxy Firewalls}
 %050_Proxy_Firewalls.pdf
+Proxies verhalten sich für den inneren Client wie der äußere Server und andersherum. Client und Server werden niemals direkt miteinander agieren. Der Proxy ist außerdem intransparent. Auf dem Proxy selbst können ein paar Programme laufen, die sicher sind und denen vertraut werden kann.\\
+
+\textbf{Beispiel}: Der Nutzer fragt eine HTTP-Ressource an. Dessen Software leitet die Anfrage an den Proxy weiter. Der Proxy baut die Verbindung auf und gibt sich als Client aus, der die HTTP-Ressource beim Server anfragt. Sämtlicher Traffic zwischen dem internen Nutzer und dem externen System wird durch den Proxy geleitet.\\
+
+Unter einem \textbf{Bastion Host} versteht man in diesem Kontext einen Proxy der auf das öffentliche Internet zugreift und daher besonders gegen Angriffe geschützt und abgehärtet werden muss. Dies ist notwendig, da der Proxy-Server von außerhalb des Netzwerks sichtbar ist. Da Proxies kein IP-Forwarding machen, besitzen sie üblicherweise mit zwei Network-Interfaces. Die interne Struktur des Netzwerks bleibt vor äußeren Einblicken gesichert. (Passive Fingerabdrücke sind nicht möglich)\\
+
+Es gibt verschiedene Arten von Proxies:
+	\begin{itemize}
+	\item \textbf{Forward Proxy}: weitverbreitetste Form, bei der die Verbindung vom internen Client initiiert wird
+	\item \textbf{Reverse Proxy}: Hier wird die Verbindung von der externen Seite initiiert. Wird von Sicherheitsservices genutzt: Der ankommende Datenverkehr wird vom Proxy überwacht.
+	\item \textbf{Application-Level Proxy}: Bietet für jeden Service Policies, die bestimmten Traffic genehmigen (bspw. Nutzer, Adressen, Computer,...)
+	\end{itemize}
+%Nächste FOlie: 9
+
 
 \section{Policies}
 %060_Policies.pdf
