@@ -583,8 +583,102 @@ Annahme:
 \section{Honeypots and Tarpits}
 %080_Honeypots_and_Tarpits.pdf
 
+\subsection{Honeypot}
+Antivirus Software Hersteller möchten neue Viren und Varianten kennenlernen
+\begin{itemize}
+	\item Forschungshoneypots
+    \item gewöhnlich große verteilte Netzwerke von Fallen
+\end{itemize}
+Netzwerkadmin möchte Informationen über aktuelle Bedrohungen erlangen
+\begin{itemize}
+	\item gewinnbringende (productive?) Honeypots
+    \item um Infos über bekannte Angriffstypen zu erlangen
+\end{itemize}
+\subsubsection{Honeypots um Angreifer abzulenken}
+Admin möchte Angreifer vor verletzlicheren Zielen ablenken
+Aus Netzwerksicherheitstechnischer Sicht keine akzeptable Methode!
+\subsubsection{Arbeitsprinzipien}
+Honeypots verhalten sich wie reale Systeme.\\
+Angreifer sollen nicht mitbekommen können, dass sie mit einem Honeypot interagieren.\\
+Honeypot zeichnet alle Nutzer/Client Handlungen auf.\\
+Admin möchte den Spuren eines Angreifers folgen.\\
+Später folgt eine Analyse der Angriffsmuster.
+\subsection{Honeynets}
+Reale Systeme hinter einem Gateway beobachten alle Netzwerkaktivitäten.\\
+Es können nur Netzwerkaktivitäten beobachtet werden, lokale Aktivitäten (Viren etc.) sind nicht interessant.\\
+\subsection{Spam Traps}
+E-Mail Adressen werden in gut sichtbaren Bereichen platziert.\\
+Alle Nachrichten die an diese Adressen geschickt werden, werden als Spam betrachtet, da die Köder nicht für echt Anwendungen benutzt werden.\\
+Später Blacklisting der entsprechenden Adressen und Sender.
+\subsection{Virus Traps}
+Antivirus Forscher zeichnen alle Virusaktivitäten in einer "`Sand Box"' auf.\\
+Große Vielfalt an Systemkonfigurationen ist notwendig.\\
+Gegenmaßnahmen müssen sehr schnell (normalerweise innerhalb von 6 Stunden) entwickelt werden.
+\subsection{Tarpits}
+Wie Honeypots, jedoch mit aktiver Funktion.\\
+Verlangsamen Angreifer indem Warteperioden in Protokolle eingeführt werden.\\
+Reduzieren die Verbreitungsgeschwindigkeit von Würmen.\\
+Erhöhen die Kosten für die Angreifer.\\
+BSP: Tarpit verzögert die SMTP Antworten solange, dass fast der Timeout eintritt.
+\subsection{Proof-of-work Systeme}
+Proof-of-work (POW) fügt einem Dienst einen Preis hinzu.\\
+ökonomische Maßnahme um DoS Angriffe oder Spam zu verhindern.\\
+benötigen für gewöhnlich Rechenzeit.\\
+Können als Nebenprodukt für praktische Rechenaufgaben benutzt werden (Jeder Sender einer Mail rechnet also ein kleines bisschen an einem Problem das eh gelöst werden soll weiter). 
 \section{Public Key Infrastructure}
 %100_PKI.pdf
+Ziele/Zwecke von PKI:
+\begin{itemize}
+	\item Erzeugung,
+    \item Verteilung und
+    \item Widerrufung von Zertifikaten.\\
+    \item Unterstützung bei sicherer Kommunikation und in der Handhabung von rechtlich bindenden Dokumenten (Signaturen, Nichtabstreitbarkeit).
+    \item Komponente im DRM System
+\end{itemize}
+Public Key Kryptographie: Ein Schlüssen zum Verschlüsseln, ein anderer zum Entschlüsseln.\\
+bekannte Algos sind: Diffie-Hellman(DH) und RSA.\\
+\subsection{Zertifikaterstellung}
+Nutzer erstellt Schlüsselpaar(Als Datei oder auf einer Smartcard).\\
+Public Key muss authentifiziert werden.
+\begin{itemize}
+	\item CA signiert den Public Key und generiert damit ein Zertifikat.
+\end{itemize}
+\subsection{PKI Protokolle}
+X.509:
+\begin{itemize}
+	\item ermöglicht Interoperabilität zwischen mehreren Anwendungen (Webserver, Mail tool, VPN Gateway).
+\end{itemize}
+LDAP:
+\begin{itemize}
+	\item wird herkömmlicherweise genutzt um X.509 Zertifikate und Revocationlists der PKI zu verteilen. 
+\end{itemize}
+\subsection{Zertifikatwiderruf}
+Zertifikate können öffentlich verteilt hochverfügbar gemacht werden.\\
+Private Keys können verloren gehen oder gestohlen werden.\\
+\begin{itemize}
+	\item verlorene Keys können erneut generiert werden.
+    \item gestohlene Keys stellen eine Sicherheitsbedrohung dar.
+\end{itemize}
+CA unterhält eine Liste der widerrufenen Keys- Certificate Revocation List (CRL)
+\subsection{Zertifikatsverwaltung}
+normalerweise stark reguliert (durch Firmenrichtlinien oder nationale Gesetze).\\
+Funktionen:
+\begin{itemize}
+	\item öffentlicher Aufbewahrungsort für Zertifikate (LDAP).
+    \item Ablage für Revocation List.
+\end{itemize}
+\subsection{Schlüsselverwaltung}
+private Keys müssen gegen Diebstahl und Verlust geschützt werden.\\
+Manche PKI Systeme generieren Keys für Nutzer und liefern diese zu ihnen.\\
+Chronik der public Keys muss gepflegt werden.\\
+\subsection{Client Software}
+interagiert mit Server Komponenten.\\
+erlaubt Schlüssel- und Zertifikatsverwaltung.\\
+\subsection{Hardware Tokens}
+private Keys sind gefährdet wenn die auf Festplatten gespeichert sind.\\
+private Keys können nicht einfach verteilt werden.\\
+Tokens schützen Schlüssel und bieten zusätzliche Sicherheit, da der Nutzer ein physikalisches Token vorliegen hat.\\
+Formen: Smartcards, RFID Tags, USB Token, iButton.
 
 \section{Enterprise Authentication}
 %110_Enterprise_Authentication.pdf
