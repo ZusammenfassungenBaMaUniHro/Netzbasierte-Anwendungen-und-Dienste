@@ -374,18 +374,65 @@ Zustandsbehaftete Firewalls können beide Layer beobachten.
 \section{Proxy Firewalls}
 %050_Proxy_Firewalls.pdf
 Proxies verhalten sich für den inneren Client wie der äußere Server und andersherum. Client und Server werden niemals direkt miteinander agieren. Der Proxy ist außerdem intransparent. Auf dem Proxy selbst können ein paar Programme laufen, die sicher sind und denen vertraut werden kann.\\
+Proxies können die interne Struktur eines Netzwerkes nach außen hin verstecken und gegen Protokoll-Angriffe schützen. Forward Proxies sind ein Mittel, um ausgehenden Traffic zu kontrollieren - Reverse Proxies für eingehende Verbindungen.
 
 \textbf{Beispiel}: Der Nutzer fragt eine HTTP-Ressource an. Dessen Software leitet die Anfrage an den Proxy weiter. Der Proxy baut die Verbindung auf und gibt sich als Client aus, der die HTTP-Ressource beim Server anfragt. Sämtlicher Traffic zwischen dem internen Nutzer und dem externen System wird durch den Proxy geleitet.\\
 
+\subsection{Bastion Host}
 Unter einem \textbf{Bastion Host} versteht man in diesem Kontext einen Proxy der auf das öffentliche Internet zugreift und daher besonders gegen Angriffe geschützt und abgehärtet werden muss. Dies ist notwendig, da der Proxy-Server von außerhalb des Netzwerks sichtbar ist. Da Proxies kein IP-Forwarding machen, besitzen sie üblicherweise mit zwei Network-Interfaces. Die interne Struktur des Netzwerks bleibt vor äußeren Einblicken gesichert. (Passive Fingerabdrücke sind nicht möglich)\\
 
-Es gibt verschiedene Arten von Proxies:
+\subsection{Arten von Proxies}
 	\begin{itemize}
-	\item \textbf{Forward Proxy}: weitverbreitetste Form, bei der die Verbindung vom internen Client initiiert wird
+	\item \textbf{Forward Proxy}: Weitverbreitetste Form, bei der die Verbindung vom internen Client initiiert wird
 	\item \textbf{Reverse Proxy}: Hier wird die Verbindung von der externen Seite initiiert. Wird von Sicherheitsservices genutzt: Der ankommende Datenverkehr wird vom Proxy überwacht.
 	\item \textbf{Application-Level Proxy}: Bietet für jeden Service Policies, die bestimmten Traffic genehmigen (bspw. Nutzer, Adressen, Computer,...)
+	\item \textbf{Transparent Proxy}: Ein transparenter Proxy (intercepting proxy, inline proxy, or forced proxy) leitet die normale Kommunikation für beide Seiten normal auf dem Network-Layer weiter. Es ist keine spezielle Konfiguration notwendig. Der Client muss sich der Existenz des Proxies nicht bewusst sein.
+	\item \textbf{Intercepting Proxies} Diese "`abfangenden"' Proxies werden üblicherweise benutzt um Policies durchzusetzen, ohne dass eine clientseitige Browserkonfiguration notwendig wäre. Bspw. Nacktfilter
+	\item \textbf{Intransparente Proxies} Für diese Art muss der Nutzer sein Gerät anpassen, um den Proxy nutzen zu können.
+	\item \textbf{Circuit-level Proxy} Die Filterung dieses Proxies wird durch speziellere Regeln definiert. Der Inhalt wird auf Schlagwörter, Größe, Viren, Datentypen, Bilderkennnung, Passwörter oder ähnliches geprüft. Des Weiteren ist Authentifikation/ Legitimation möglich, um bestimmten Nutzern Rechte einzuräumen.
 	\end{itemize}
-%Nächste FOlie: 9
+
+\subsection{SOCKS}
+Bei SOCKS handelt es sich um ein Proxy-Toolkit. Es ermöglicht, dass Anwendungen sich ohne spezielle Client-Software mit Proxies verbinden können. Ein SOCKS-Server führt Client Authentifizierung und Authorisierung durch. Zur Kommunikation mit einem SOCKS-Server sind jedoch Modifikationen notwendig.\\
+
+\noindent Der Client sendet einen Request an den Server. In diesem Request sind die Identität des Clients, die Ziel-Adresse (Ausgehende Verbindungen) ODER der Port (Eingehende Verbindungen.\\
+Der Proxy prüft (als Server), ob der Request bewilligt werden soll. Im positiven Fall, antwortet er mit einem Reply-Paket, welches den Return-Code der Operation beinhaltet.\\
+Protokoll:
+	\begin{itemize}
+	\item Der Client möchte sich mit einem externen Service verbinden und sendet diesen Request:\\
+		$|$ VN $|$ CD $|$ DSTPORT $|$ DSTIP $|$ USERID $|$ ... $|$ NULL $|$\\
+		(VN-Versionsnummer, CD-Command)
+	\item Reply
+		$|$ VN $|$ CD $|$ DSTPORT $|$ DSTIP $|$ \\
+		(90: request granted, 91: request rejected or failed, 92: request rejected
+		becasue SOCKS server cannot connect to identd on the client, 93: request
+		rejected because the client program and identd report different user-ids)
+	\item Client bietet eine eingehende Verbindung an und sendet einen Bind-Request\\
+	$|$ VN $|$ CD $|$ DSTPORT $|$ DSTIP $|$ USERID $|$ ... $|$ NULL $|$
+	\end{itemize}
+
+\subsection{Umgang mit Verschlüsselung}
+Wenn die übertragenen Daten verschlüsselt sind, ist eine Ende-zu-Ende-Verschlüsselung nicht möglich. Der Proxy kann die übertragenen Daten nicht verändern, wenn diese verschlüsselt sind. Deshalb ist es unmöglich den Inhalt zu überprüfen.\\
+Es kann zu Problemen bei der Authentifizierung kommen, wenn zwischen Server und Client ein Proxy sich befindet. Diese Probleme treten insbesondere dann auf, wenn dieser versucht die Daten zu entschlüsseln.\\
+Der Proxy kann jedoch als Client agieren. In diesem Fall überträgt er die Daten entschlüsselt zum Client und verschlüsselt zum Server.
+
+\subsection{Diskussion}
+\textbf{Vorteile}:
+	\begin{itemize}
+	\item Schutz der internen Struktur nach Außen
+	\item Datentraffic kann einfach überwacht werden
+	\item Nutzerbezogene Sicherheit ist möglich
+	\item Authentifikation kann implementiert werden
+	\item Schützt vor Spoofing (Der Proxy generiert sämtlichen ausgehenden Traffic für einen Außenstehenden)
+	\end{itemize}
+\noindent\textbf{Nachteile}:
+	\begin{itemize}
+	\item Leistungseinbußen
+	\item Single Point of Failure/Attack
+	\item Anwendungsspezifische Proxies müssen für jede einzelnen Anwendungen entwickelt werden
+	\item Software muss angepasst werden
+	\item Bastion Host muss gehärtet werden
+	\end{itemize}
 
 
 \section{Policies}
