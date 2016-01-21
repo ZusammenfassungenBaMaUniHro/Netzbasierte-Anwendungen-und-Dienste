@@ -729,10 +729,279 @@ Formen: Smartcards, RFID Tags, USB Token, iButton.
 
 \section{Enterprise Authentication}
 %110_Enterprise_Authentication.pdf
+Authentifikation:
+\begin{itemize}
+	\item Prozess in dem versucht wird die Identität oder den Anspruch (claim?) von jemanden zu verifizieren.
+\end{itemize}
+Bedarf an Authentifikation:
+\begin{itemize}
+	\item Login Prozess / Zugriffskontrolle
+    \item Sicherheitsprotokolle, Web of Trust
+\end{itemize}
+\subsection{Authentifikationsprinzipien}
+Wissensbasiert (PIN, Password, Keyphrase, persönliche Infos)
+\begin{itemize}
+	\item geteilte geheime Information muss dem Authentikator präsentiert werden.
+    \item Probleme:
+    
+    \begin{itemize}
+        \item Nutzer wählt schwaches Passwort
+        \item Nutzer vergisst Passwort
+        \item Password ist kompromittiert.
+    \end{itemize}
+\end{itemize}
+Besitzbasiert (SmartCard, SIM Card, Kreditkarte, Handy, PC etc)
+\begin{itemize}
+	\item Die Tatsache, dass jemand im Besitz von etwas bestimmten ist, muss über das Netzwerk verifiziert werden.
+    
+    \begin{itemize}
+        \item Es muss eine geheime Information im Token geben.
+        \item Geheime Info an sich sollte nicht über das Netzwerk transportiert werden.
+        \item Nutzer können das Token verlieren.
+        \item Token kann kopiert werden.
+    \end{itemize}
+\end{itemize}
+Biometrisch (Retina, Iris, Fingerabdruck, DNA, Stimme...)
+\begin{itemize}
+	\item Biometrische Eigenschaften können nicht vergessen, gestohlen, abgehört oder gelernt werden.
+    \item Handhabung ist z.T. kompliziert.
+    \item Normalerweise die einzige Methode um eine Person an ein Gerät zu binden. Alle anderen Methoden können auch irgendwie von anderen Personen durchgeführt werden.
+\end{itemize}
+Erhöhte Sicherheit durch 2-Faktor.Authentifizierung.
+\begin{itemize}
+	\item 2 der oberen Methoden kombiniert
+    \item aka "`strong authentication"'
+\end{itemize}
+\subsection{Probleme}
+Wie authentifiziert man sich gegenüber jemanden der sich selber nicht authentifiziert hat?
+\begin{itemize}
+	\item Könnte Man in the middle sein.
+    \item Replay Attacken müssen verhindert werden, benötigen gegenseitige Authentifizierung.
+\end{itemize}
+Wie authentifiziert man sich über Wissen oder Besitz ohne das Geheimniss / den Beweis offen zu übermitteln?\\
+Standardisierte Protokolle für viele Anwedungen.
+\subsection{Angriffe}
+Man in the middle:
+\begin{itemize}
+	\item Jemand "`sitzt"' zwischen 2 Kommunikationspartnern und spielt beide Rollen.
+    \item Es wird ein vertrauenswürdiger Dritter benötigt um diese Angriffe zu verhindern.
+\end{itemize}
+Replayattacken:
+\begin{itemize}
+	\item Jemand zeichnet eine verschlüsselte Authentifizierungsnachricht auf und sendet diese ebenfalls um Zugriff zu erlangen.
+    \item Ein einzigartiger Wert (im optimalen Fall nur einmalig genutzt) wird in jeder Nachricht benötigt.
+\end{itemize}
+Denial of Service:
+\begin{itemize}
+	\item Vandalismus
+    \item jemand versucht die Kommunikation zu verstopfen.
+    \item Für gewöhnlich schwer zu besiegen/verhindern.
+\end{itemize}
+\subsection{Klartextpasswörter}
+Einige Protokolle nutzen unverschlüsselte Passwörter (Telnet, FTP, POP3, IMAP4).
+\subsection{Challenge-Response}
+Geteiltes Geheimnis an sich soll nicht übermittelt werden, aber das Wissen soll bewiesen werden.\\
+Replay Attacken sollen verhindert werden.
+Ablauf:
+\begin{itemize}
+	\item Antragsteller fragt beim Server um Zugriff an.
+    \item Server schickt eine Challenge.
+    \item Antragssteller berechnet die Antwort (normalerweise ein kryptografischer Hashwert).
+    \item A sendet die Antwort.
+    \item Server vergleicht Antwort mit Ergebnis und gewährt Zugriff.
+\end{itemize}
+\subsection{Authentifikationsmethoden}
+\subsubsection{Kerberos}
+Computer Netzwerk Authentifizierungsprotokoll\\
+erlaubt es Einzelnen über ein unsicheres Netzwerk zu kommunizieren um ihre Identität gegenüber jemand anderen auf einem sicheren Weg zu beweisen.\\
+Die Entwickler richteten sich hauptsächlich an Client-Server-Modelle und  unterstützen gegenseitige Authentifizierung.\\
+Nachrichten sind gegen Abhörung und Replay Attacken abgesichert.\\
+Bestandteile:
+\begin{itemize}
+	\item Client
+    \item Authentication Server
+    \item Ticket granting Server
+    \item Service Server
+\end{itemize}
+Ablauf (stark zusammengefasst! Details stehen in Folie 110 S.19ff. Laut Thomas jedoch nicht prüfungsrelevant!):
+\begin{itemize}
+	\item Authentifizierung
+    \item Authorisierung
+    \item Anfrage
+\end{itemize}
+\subsection{RADIUS}
+wie Kerberos für Authentifizierung, Autorisierung und Abrechnung(Accounting?) der Netzwerkressourcen genutzt.\\
+für DSL, wireless(802.1X) und VPNs verwendet.
+\subsubsection{CHAP}
+Nutzt 3-way-handshake des point-to-point Protokolls als Authentifizierung.
+\subsubsection{PAP}
+Password authentication protocol\\
+Unverschlüsselte ASCII Passwörter\\
+total unsicher, aber oft verwendet.\\
+Client sendet Nutzername und Passwort.\\
+Sever sendet authentication-ack (wenn Credentials stimmen) oder authentication-nak (sonst).
+\subsection{Single sign on}
+Methode um das Eingeben von Passwörtern für verschiedene Anwendungen zu reduzieren.
+\begin{itemize}
+	\item vereinheitlichte Authentifizierung
+    \item Speichern von Passwörtern (gefährlich)
+    \item Speichern von Anmeldedaten (siehe Kerberos)
+\end{itemize}
 
 \section{Securing Hosts and Appliances}
 %120_Securing_hosts_and_appliances.pdf
-
+\subsection{Host Sicherheit}
+Jedes System das Teil eines Netzwerkes ist ist potentiellen Opfer eines Angriffes.\\
+Übernommene Rechner innerhalb eines Netzwerkes stellen ein ernstes Risiko dar.\\
+Falscher Glauben in die Sicherheitsmaßnahmen im Netzwerk erleichtert solche Angriffe.
+\subsubsection{Härten gegen lokale Angriffe}
+Administrative Programme begrenzen\\
+Alle unnötigen Tools entfernen.\\
+Für gewöhnlich ist es schwerer einen Angreifer zu stoppen nachdem er Zugriff erlangt hat.\\
+Dateiberechtigungen:
+\begin{itemize}
+	\item Richtige Datei- und Verzeichnisberechtigungen um zu verhindern, dass lokale Nutzer das System übernehmen können.
+    \item auch genutzt um den Zugriff auf geheime Dokumente zu begrenzen.
+    \item Andere Zugriffskontrollschemata erwägen.
+\end{itemize}
+Gruppenmanagement:
+\begin{itemize}
+	\item Strikte Kontrolle der Mitgliederschaften der Gruppen
+    \item Gruppen mit den niedrigst möglichen Rechten bevorzugen.
+\end{itemize}
+Logging:
+\begin{itemize}
+	\item IDS kann Anomalien im Netzwerkverkehr nur entdecken wenn dieser das IDS passiert hat.
+    \item Sicherheitsrelevante Infos sollten jedoch auch lokal geloggt werden.
+\end{itemize}
+\subsubsection{Härten gegen Netzwerkangriffe}
+Host gegen Angriffe aus dem internen Netz schützen.\\
+Alle bekannten Sicherheitsmaßnahmen wie Firewalls etc. bieten keinen Schutz gegen solche Angriffe.\\
+Unnötige Accounts und Dienste entfernen:
+\begin{itemize}
+	\item Effektivster Weg um erfolgreiche Angriffe zu verhindern.
+    \item Jeder laufende Dienst kann potentiel fehlerhaft sein.
+    \item Unnötige Accounts löschen um zu verhindern dass ein Angreifer sie nutzt.
+    \item Deaktivierte Accounts können wieder aktiviert werden.
+\end{itemize}
+Passwort Richtlinien:
+\begin{itemize}
+	\item Wörterbuchangriffe verhindern - neue Passwörter gegen bekannte Wörterbücher gegenchecken.
+    \item Minimale Länge und Komplexität
+    \item regelmäßigen Passwortwechsel erzwingen
+    \item Wechsel zu früherem Passwort verhinden
+    \item zu häufiges Wechseln des Passwortes verhindern
+\end{itemize}
+Public Key Authentifizierung:
+\begin{itemize}
+	\item Public Key auf Host gespeichert - Nutzer muss private Key kennen um sich anzumelden
+    \item SmartCards bieten weitere Sicherheit
+\end{itemize}
+Default Passwörter ändern!\\
+\subsubsection{Härten gegen Anwendungsangriffe}
+Übernahme des Rechners du Einbruch in Anwendungen die auf einem höherem Priveligierungslevel laufen.
+\begin{itemize}
+	\item Buffer overflows
+    \item Anwendungspasswörter (z.B. Datenbank)
+    \item spezifische Accounts für Anwendungen
+\end{itemize}
+Patches:
+\begin{itemize}
+	\item Jede verfügbare Software enthält Fehler
+    \item einige von denen sind kritisch für die Systemsicherheit
+    \item für gewöhnlich werden Patches von zu Zeit verfügbar, admin muss benachrichtigt werden.
+    \item newsletter, automatische Updates (in manchen Fällen gefährlich)
+\end{itemize}
+Anti-Virus Software:
+\begin{itemize}
+	\item kann als online Filter im Netzwerk laufen oder auf lokalen Rechnern.
+    \item Muss aktuell gehalten werden um ausreichenden Schutz zu bieten.
+    \item Gewöhnlich mit auto-Update Funktion
+    \item manche agressive Viren verbreiten sich dennoch schneller.
+    \item Anti-Virus Software kann jedoch auch selbst verwundbar sein
+    \item Probleme mit komprimierten / verschlüsselten Dateien.
+\end{itemize}
+Zusätzliche Maßnahmen:
+\begin{itemize}
+	\item Hashes für ausführbare Dateien berechnen um Änderungen zu bemerken
+    \item Verdächtiges Verhalten entdecken.
+\end{itemize}
+\subsection{Host Firewalls}
+ Umfassende Firewalls schützen das interne Netz nur vor dem externen Netz\\
+einige Angreifer/Malware kann sich im internen Netz befinden\\
+Host Firewalls (personal Firewalls) arbeiten nach den gleichen Prinzipien wie die Firewalls an den Netzwerkgrenzen.\\
+\begin{itemize}
+	\item Paketfilter
+    \item Zustandsbehaftete Paketfilter
+\end{itemize}
+Host Firewalls können außerdem entdecken welche Prozess versucht Daten zu senden\\
+Egress Filter (Filtern des ausgehenden Verkehrs) können einige Angriffe auf benachbarte Rechner verhindern.\\
+Host Firewalls müssen entweder von einem Admin konfiguriert werden, oder sehr einfach bedienbar sein.
+\subsection{Host IDS}
+Log Generierung fütr post mortem Analyse
+\begin{itemize}
+	\item Logging des Dateisystems
+    \item Logging der Netzwerkverbindungen
+    \item Logging der Zugriffe auf die Log Files
+\end{itemize}
+\subsection{Sichere Verteilung von Software}
+Updates, Patches, Muster müssen auf alle Rechner im Netz runtergeladen werden.\\
+Updateprozess bedeutet eine ernste Sicherheitsbedrohung (Auslieferung von Maleware auf dem Silbertablett).\\
+Schutz der Softwareverteilung
+\begin{itemize}
+	\item Digitale Signaturen
+\end{itemize}
+\subsection{Netzwerkgeräte}
+Router und Switches sind zentrale Komponenten eines Netzwerkes, verantwortlich dafür den Weg der Pakete auf Data link und Network layer zu bestimmten.\\
+Ein Router verbindet 2 oder mehrere Netzwerke\\
+mögliche Angriffe:
+\begin{itemize}
+	\item Re-routing von Paketen
+    
+    \begin{itemize}
+        \item Man-in-the-middle
+        \item DoS
+        \item Überbrückung anderer Sicherheitskomponenten
+    \end{itemize}
+    \item Statistiken sammeln
+\end{itemize}
+\subsubsection{spezielle Router}
+NAT Gateway - network address translation
+\begin{itemize}
+	\item Router hat eine nach außen gerichtete Adresse und liefert private interne Adressen
+    \item Interne Adressen sind nicht erreichbar bis der Router eine Adressenübersetzung (address translation) durchgeführt hat.
+    \item Router führt diese Übersetzung nur durch wenn eine entsprechende Regel existiert.
+\end{itemize}
+VPN Gateway 
+\begin{itemize}
+	\item Router liefert Authentifizierung, Verschlüsselung und Autorisierung.
+    \item siehe VPN
+\end{itemize}
+kombinierte Geräte
+\begin{itemize}
+	\item Router können integrierte Firewalls, proxys etc. haben.
+\end{itemize}
+\subsubsection{Härten}
+Betriebssystem das auf den Routern und Switches
+\begin{itemize}
+	\item OS sollte unter speziellen Sicherheitsaspekten entwickelt worden sein
+    \item Sicherheitsupdates sollten verfügbar sein
+\end{itemize}
+Zugriff zu Geräten
+\begin{itemize}
+	\item Protokoll (telnet vs. ssh, http vs https)
+    \item SNMP (Simple Network Management Protocol)
+    \item ACL zu bestimmter Konsole
+    \item Serieller Port für Konfiguration
+    \item Physikalischer Zugriff
+    \item alle nicht benötigten Dienste abschalten
+\end{itemize}
+Logging der sicherheitsrelevanten Vorfälle
+\begin{itemize}
+	\item Zugriff zu Routerkofiguration
+    \item Änderungen in der Konfiguration
+    \item Ungewöhnlich hohe "`Verkehrsaufkommen"'
+\end{itemize}
 \section{Organisational Aspects}
 %130_Organisational_Aspects.pdf
 
