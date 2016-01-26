@@ -1126,6 +1126,126 @@ Organisations- und Meldestrukturen müssen etabliert werden bevor das Desaster d
 
 \section{Computer Forensics}
 %140_Computer_Forensics.pdf
+Generell ist Forensik die Wissenschaft um Gerichtsprozesse zu unterstützen.\\
+Computerforensik bedeutet:
+\begin{itemize}
+	\item Daten von Speichermedien oder Netzwerkprotokollen sicherstellen
+    \item Überprüfung von Computersystemen
+    \item Meinungsbericht wiedergeben
+\end{itemize}
+
+Die gleichen Technologien werden auch für Industriespionage benutzt.\\
+Computerforensik ist die Suche nach Beweisen, die auf digitalen Geräten gefunden werden können die in einem Zwischenfall verwickelt waren.\\
+\subsection{Was ist es nicht?}
+Proaktiv:
+\begin{itemize}
+	\item reagiert auf Ereignisse oder Anfragen
+\end{itemize}
+Das Finden des "`bösen Jungen"':
+\begin{itemize}
+	\item Es geht um das finden von wertvollen Beweisen.
+\end{itemize}
+
+\subsection{Schritte}
+Herunterfahren
+\begin{itemize}
+	\item Einige Daten sind eventuell flüchtig im Speicher gespeichert - versuchen diese zu retten.
+\end{itemize}
+Konfiguration dokumentieren
+\begin{itemize}
+	\item angeschlossene Geräte/Netzwerke
+    \item Verkabelung
+\end{itemize}
+Daten duplizieren
+\begin{itemize}
+	\item Image (1-zu-1 Kopie) der gespeicherten Medien erstellen um Manipulation der Beweismittel zu verhindern.
+    \item Jegliche Änderungen an den duplizierten Daten verhindern.
+\end{itemize}
+Daten sortieren\\
+Daten wiederherstellen
+\begin{itemize}
+	\item Clean room technology (?)
+\end{itemize}
+\subsection{Zerstörung von Daten}
+Schredder\\
+Mehrfaches Schreiben von Zufallsdaten\\
+Magnetische Felder\\
+\subsection{Absichten/Ziele}
+Computersysteme analysieren\\
+Daten wiederherstellen im Falle eines Defektes\\
+Computersystem nach einem Angriff analysieren
+\begin{itemize}
+	\item herausfinden wie der Angreifer Zugriff erlangen konnte
+    \item herausfinden was der Angreifer getan hat
+\end{itemize}
+Beweise gegen einen Angestellten sammeln den die Firma kündigen möchte.\\
+Informationen darüber gewinnen wie Computersysteme funktionieren (reverse Engineering)
+\subsection{Phasen}
+Systemkonservierung, Beweissuche, Ereignisrekonstruktion\\
+\subsubsection{Systemkonservierung}
+Ziel: Menge der Beweise die evtl überschrieben werden reduzieren/verhindern
+\begin{itemize}
+	\item Live Systeme müssen Daten aus flüchtigen Speichern bewahren
+    \item Tote Systeme enthalten Daten in nicht flüchtigen Speichern
+\end{itemize}
+Typische Aktionen:
+\begin{itemize}
+	\item Speicherauszug (Memory dump) erstellen
+    \item Image der originalen Daten erstellen
+\end{itemize}
+\subsubsection{Beweissuche}
+Suchen ist ein recht einfacher Prozess
+\begin{itemize}
+	\item Eigenschaften des Objektes definieren
+    \item nach dem Objekt in einer Sammlung von Daten suchen
+\end{itemize}
+Wenn die Sammlung groß ist muss Ermittler wissen wo er suchen muss
+\begin{itemize}
+	\item verschiedene Speichermedien
+    \item Verschiedene Orte auf den Medien
+    \item Adressen filtern (IP-Adressen, Port, Herkunft)
+    \item Nach Passwörtern filtern
+\end{itemize}
+
+\subsubsection{Rekonstruktion}
+Daten analysieren um herauszufinden welche Ereignisse in dem System stattgefunden haben.\\
+Versuchen solche Fragen zu beantworten:
+\begin{itemize}
+	\item Wem gehört eine Datei?
+    \item Wer hat einen Account erstellt
+    \item Wann ist das System zusammengebrochen?
+    \item Wie schnell war das Auto?
+\end{itemize}
+Bezug zwischen digital gespeicherten Ereignissen und physischen Ereignissen herstellen.
+\subsection{Datenanalyse}
+\subsubsection{Analyse von physischen Speichermedien}
+Gerät welches Daten speichert\\
+typischerweise in Blöcken organisiert\\
+BSP: HDD, USB-Sticks, CD/DVD/Bluray....
+\subsubsection{Datenträgeranalyse}
+Speicherbereich für ein einzelnes Dateisystem\\
+Kann sich über mehrere Medien spannen.\\
+befindet sich normalerweise in einer Partition\\
+auch bekannt als "`logisches Laufwerk"'
+\subsubsection{Dateisystemanalyse}
+Enthält Dateien und Verzeichnisse\\
+Enthält ebenso Metadaten
+\begin{itemize}
+	\item Zeiten
+    \item Zugriffsrechte
+    \item Protokolle
+\end{itemize}
+Für den Nutzer direkt über das Betriebssystem verfügbar.
+\subsection{Probleme bei der Untersuchung von Festplatten}
+Verschlüsselung\\
+Unbekannte Dateisysteme\\
+Versteckte Daten\\
+Interne Konfigurationen der Festplatte (z.B. Dead Sector Mapping)\\
+\subsection{Achtung!}
+Vieles weggelassen was einzelne Methoden, Dateisysteme etc angeht!
+
+
+
 \section{Gebäudesicherheit}
 %150_Gebäudesicherheit.pdf
 \section{Cloud Security}
