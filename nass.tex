@@ -1248,10 +1248,164 @@ Vieles weggelassen was einzelne Methoden, Dateisysteme etc angeht!
 
 \section{Gebäudesicherheit}
 %150_Gebäudesicherheit.pdf
+Funktionen von Gebäuden bei der IT-Sicherheit:
+\begin{itemize}
+	\item Einschränkung des Zugangs zu Rechnersystemen
+    \item Sichere Beherbergung der Rechnertechnik
+    \item Bereitstellung der notwendigen Infrastruktur (Strom, Datenleitungen, etc...)
+\end{itemize}
+Gefährdungen:
+\begin{itemize}
+	\item Höhere Gewalt (Wasser, Feuer, Sturm, Blitz)
+    \item Menschliches Versagen (Fehlbedienungen, Verkehrsunfälle...)
+    \item Technisches Versagen (Ausfall der Versorgungsleitungen (Strom/Daten) oder Sicherungseinrichtungen)
+    \item Vorsätzliche Handlungen (unbefugtes Eindringen, Zerstörung, Diebstahl, Vandalismus, Anschläge)
+\end{itemize}
+Maßnahmen:
+\begin{itemize}
+	\item Einbruchschutz (Zaun, Schließsysteme, Alarmanlage etc.)
+    \item Schutz vor Ausfällen und höherer Gewalt (Standort, Schutzeinrichtungen, Feuerlöscher etc.)
+\end{itemize}
+\subsection{Zugriffskontrolle}
+Mechanische Schlüssel\\
+Biometrie\\
+Elektronische Schlüssel / Karten\\
+Mechatronische Schlüssel\\
+Pförtner
+\subsubsection{Gründe für mechatronische Schlüssel}
+konventionelle Schlüssel sind unsicher und unhandlich
+\begin{itemize}
+	\item Duplikate von Schlüsseln
+    \item Keine Audit-Informationen(?)
+    \item keine zeitliche Beschränkung
+    \item Generalschlüssel
+    \item Schlüsselauslieferung umständlich
+    \item Keine Rückziehung von Schlüsseln möglich, umständlicher Schlossaustausch
+\end{itemize}
+\subsubsection{Angriffe}
+Gewaltsamer Zugriff:
+\begin{itemize}
+	\item Mechanische Zerstörung des Schlosses
+    \item Standards verlangen mind. 5 Min Widerstandszeit
+\end{itemize}
+Verdeckter Zutritt:
+\begin{itemize}
+	\item Zutritt ohne das Schloss zu zerstören und ohne Spuren zu hinterlassen (Picking, Generalschlüssel)
+    \item Standards verlangen 10-15 Minuten Widerstandszeit
+\end{itemize}
+Angriff mit Schlüssel:
+\begin{itemize}
+	\item Angriff auf Schlüsselverwaltung (Duplikat erstellen, Schlüssel nachbestellen)
+    \item Gute Voraussetzungen: Verfügbarkeit von Blanko-Schlüsseln oder Generalschlüsseln
+\end{itemize}
+\subsubsection{Funktionen mechatronischer Schlösser}
+Zugang:
+\begin{itemize}
+	\item Schlüssel und Schloss authentisieren sich gegenseitig (Public Key Verfahren)
+    \item Schloss hat änderbare Liste von erlaubten Schlüsseln oder Schlüssel-IDs oder Public Keys der Schlüssel
+    \item Schloss öffnet
+    \item Schloss trägt Vorgang ins Log ein
+\end{itemize}
+Zeitlich beschränkter Zutritt:
+\begin{itemize}
+	\item Schlüssel und Schloss authentisieren sich gegenseitig
+    
+    \begin{itemize}
+        \item Public Key Verfahren
+        \item Schlüssel muss die aktuelle Uhrzeit liefern. Schlüssel und Schloss entscheiden anhand der Uhrzeit über Zugang
+        \item Challenge-Response um Man-in-the-Middle mit Zeitversatz zu verhindern.
+    \end{itemize}
+    \item Schloss öffnet
+    \item Schloss trägt Vorgang ins Log ein
+\end{itemize}
+Programmierung:
+\begin{itemize}
+	\item Software liefert Liste der erlaubten Kombinationen aus Schlüsseln und Schlössern über Programmiergerät an Programmierschlüssel.
+    \item Programmierschlüssel merkt sich Listen
+    \item Programmierschlüssel und Schloss authentisieren sich gegenseitig
+    \item Schloss enthält Liste gültiger Programmierschlüsseln oder kennt Liste von gültigen root-Zertifikaten
+    \item Schloss empfängt Liste von erlaubten Schlüsseln und speichert diese
+    \item Schloss überträgt Log-Files an den Programmierschlüssel
+\end{itemize}
 \section{Cloud Security}
 %160_Cloud_Security.pdf
+Großer Hype\\
+Viele kümmern sich nicht genug um Sicherheit und Privatheit\\
+Andere kümmern sich zu sehr darum.
+Private Cloud:
+\begin{itemize}
+	\item Nur ein neuer Weg um Ressourcen zuzuweisen
+    \item Keine neuen Angriffe
+\end{itemize}
+Public Cloud:
+\begin{itemize}
+	\item Das was gemeinhin als cloud bekannt ist, also Google und co bieten Rechenleistung an
+\end{itemize}
+hybride Cloud:
+\begin{itemize}
+	\item besteht zum Teil aus privater/interner Cloud und zum anderen Teil aus öffentlicher/externer Cloud.
+\end{itemize}
+\subsection{Bedrohungen}
+Standardanforderung:
+\begin{itemize}
+	\item Verfügbarkeit und Zuverlässigkeit
+    \item Privatheit
+    \item Vertraulichkeit
+    \item Integrität
+    \item Authentizität
+\end{itemize}
+besondere Herausforderungen mit Cloudcomputing:
+\begin{itemize}
+	\item Angriffe auf Privatheit von Daten
+    \item Host Level Attacks
+    \item für virtualisierte Computer spezifizierte Angriffe. Bedrohung für den Hypervisor
+    \item Angriffe auf die Infrastrukur
+    \item Angriffe auf Anwendungen
+    \item Angriffe auf Persönlichkeiten
+\end{itemize}
+\subsection{Lösungen}
+Schutz der Technik und deren Fortbestand (Ausfallstrategien, Redundanz)\\
+Kontrolle der Technik (Netzwerkschnittstellensicherheit, Browsersicherheit, Schlüsselverwaltung)\\
+Nutzerverwaltung\\
+Sicherheitsmanagement
+
+
 \section{Human resources security}
 %170_human_resources_security.pdf
+Awareness:
+\begin{itemize}
+	\item Was ist das Problem? 
+    \item kann mit Zeitungen, Postern, Videos beigebracht werden
+\end{itemize}
+Training:
+\begin{itemize}
+	\item Wie können wir das Problem lösen?
+    \item Mit Vorlesungen, workshops zu lehren.
+\end{itemize}
+Education:
+\begin{itemize}
+	\item Warum gibt es das Problem?
+    \item Kann mit Dikussionen, Hintergrundliteratur beigebracht werden.
+\end{itemize}
+Sicherheit im Einstellungsprozess:
+\begin{itemize}
+	\item Hintergrundchecks und Sicherheitsuntersuchungen
+    \item Detaillierte Mitarbeitervereinbarungen mit Verpflichtungen bzgl Sicherheit, Vertaulichkeit und Geheimhaltung.
+\end{itemize}
+Sicherheit währen der Anstellung:
+\begin{itemize}
+	\item niedrigst niedrige Privilegierungslevel vergeben
+    \item Teilung der Pflichten und cross checks
+    \item begrenzte Abhängigkeit von Schlüsselangestellten (Bus-Faktor)
+\end{itemize}
+Kündigung:
+\begin{itemize}
+	\item Löschen von Autorisierungslisten
+    \item Zugriff auf Codes entfernen
+    \item Schlösser einsammeln
+    \item Firmenbesitz zurückholen
+    \item Geschäftspartner und Abteilungen über Kündigung unterrichten (damit der nicht anruft und im Namen der Firma handelt)
+\end{itemize}
 \section{Software Assessment}
 %180_Software_Assessment.pdf
 \section{Timing}
