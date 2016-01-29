@@ -1408,6 +1408,196 @@ Kündigung:
 \end{itemize}
 \section{Software Assessment}
 %180_Software_Assessment.pdf
+\subsection{Code Revision vs Black Box Penetration Testing}
+White Box Test:
+\begin{itemize}
+	\item Prüfer arbeitet mit dem Quelltext
+    \item manuelle Code Inspizierung
+    \item automatisierte Tools wie RATS, ITS4, Pathfinder....
+    \item komplette Codeabdeckung ist möglich
+    \item Tools sind nicht perfekt und benötigen manuelle Kontrolle
+    \item Manchmal fehlt es an Zugriff auf den Quellcode
+\end{itemize}
+Black Box Testing:
+\begin{itemize}
+	\item Prüfer "`füttert"' das System mit Eingaben
+    \item ist immer möglich
+    \item Portierbarkeit: Man kann verschiedene Anwendungen mit der gleichen Testsuit testen
+    \item Einfach
+    \item schlechte Abdeckung
+    \item manuelles Testen oder Fuzzing (automatisch generierte zufällige Eingaben für das System)    
+\end{itemize}
+Gray Box Testing:
+\begin{itemize}
+	\item kombiniert Black Box Testing mit Reverse Engineering (RE)
+    \item RE wird genutzt um eventuell verwundbare Stellen zu finden
+    \item Manuelles Gray Box Testing
+    
+    \begin{itemize}
+        \item Nutze Tool (IDA PRO o.ä.) um aus Binärcode, Assembler-Code zu erzeugen
+        \item mögliche Schwächen identifizieren
+        \item Probeeingaben erstellen
+    \end{itemize}
+    \item automatisiertes Gray Box Testing
+    
+    \begin{itemize}
+        \item Mehrere Tools um den Prozess zu automatisieren (BugScam, Inspector, Bin Audit)
+    \end{itemize}
+    \item Pro:
+    
+    \begin{itemize}
+        \item Kann immer gemacht werden
+        \item bessere Abdeckung als Black Box Testing
+    \end{itemize}
+    \item Contra:
+    
+    \begin{itemize}
+        \item RE ist sehr schwierig
+    \end{itemize}
+\end{itemize}
+\subsection{Vertrauensbeziehungen}
+Verschiedene Rechner in einem System setzen unterschiedliche Grade an Vertrauen ineinander\\
+Vertrauensbeziehungen müssen eindeutig und gut erforscht werden.\\
+Transitives Wesen von Vertrauen\\
+\subsubsection{Unangebrachtes Vertrauen}
+Eine unbegründete Annahme machen.\\
+Eingabe:
+\begin{itemize}
+	\item Die meisten Schwachstellen werden durch bösartige Eingaben ausgelöst
+    
+    \begin{itemize}
+        \item Entwickler nimmt an das niemand eine Telephonnummer mit mehr als 5000 Zeichen eingibt
+    \end{itemize}
+\end{itemize}
+Schnittstellen:
+\begin{itemize}
+	\item Entwickler nutzt eine Schnittstelle die nicht genügend Schutz vor Angriffen von außen bereitstellt.
+    \item falsche Konfigurierung von Schnittstellen
+    \item Annahme dass der Zugriff auf eine Schnittstelle zu schwierig ist für einen Angreifer
+\end{itemize}
+Umgebung:
+\begin{itemize}
+	\item Software läuft nicht im Vakuum
+    \item Entwickler vertraut der Umgebung, aber der der Angreifer kann diese manipulieren
+\end{itemize}
+Ausnahmen:
+\begin{itemize}
+	\item Angreifer verursacht unerwartete Änderungen im Anwendungsablauf durch äußere Maßnahmen.
+\end{itemize}
+\subsection{Design Review}
+Algorithmen können unter Umständen Angriffsflächen bieten\\
+Vertrauensbeziehungen:
+\begin{itemize}
+	\item Vertrauensgrenzen
+    
+    \begin{itemize}
+        \item spiegelt die Eingrenzung des Vertrauens zwischen Modulen wieder
+    \end{itemize}
+    \item Vertrauensquellen
+    
+    \begin{itemize}
+        \item Regionen des geteilten Vertrauens, eingeschränkt durch Vertrauensgrenzen
+    \end{itemize}
+    \item Vertrauensmodell
+    
+    \begin{itemize}
+        \item Abstraktion die diese Beziehungen repräsentiert
+    \end{itemize}
+\end{itemize}
+\subsubsection{Bedrohungsmodellierung}
+Prozess während der Designphase der in späteren Entwicklungsphasen aktualisiert wird.
+\begin{itemize}
+	\item Informationssammlung (Anwendung verstehen)
+    \item Modellierung der Anwendungsarchitektur (Datenflussdiagramm entwerfen)
+    \item Bedrohungsidentifikation (Angriffsbäume verwenden)
+    \item Dokumentation der Funde
+    \item Priorisierung des Implementationsreviews
+\end{itemize}
+
 \section{Timing}
 %190_Timing.pdf
+Kryptografische Nutzung von Uhren:
+\begin{itemize}
+	\item Schlüsselmanagement (gültig von bis)
+    \item Reihenfolge von Ereignissen in verteilten Systemen
+\end{itemize}
+\subsection{Ablaufzeit}
+Wir möchten die Gültigkeitsdauer von Dokumenten beschränken (Flugtickets, Copyrights)\\
+\begin{itemize}
+	\item Ablaufzeit ist normalerweise im Dokument enthalten
+    \item aktuelle Zeit muss bekannt sein
+\end{itemize}
+Eine Uhr stellt einen für eine Maschine einzigartigen Wert bereit (Wert der niemals in einem definierten Bereich doppelt verwendet wird)\\
+Bereich kann sein:
+\begin{itemize}
+	\item Session
+    \item Zwischen zwei reboots
+    \item Lebensdauer des Rechners
+\end{itemize}
+Nonces (vorläufige Buchstaben oder Zahlenfolg laut wiki) werden für verschiedene kryptografische Prozesse genutzt (Pseudozahlengenerator, Time Codes)
+\subsection{Monotonie}
+\begin{itemize}
+	\item Nutzen die Eigenschaft der Zeit dass sie immer vorwärts läuft
+    
+    \begin{itemize}
+        \item Einbindung von Zeit in ein kryptografisches Protokoll verhindert das Angreifer versuchen können ältere Nachrichten abzufangen
+    \end{itemize}
+    \item Prüfen und Loggen
+    
+    \begin{itemize}
+        \item Wenn es Konflikte gibt, liefert der Log Daten um die genaue Abfolge von Ereignissen nachzuverfolgen
+    \end{itemize}
+\end{itemize}
+\subsection{Echtzeittransaktionen}
+\begin{itemize}
+	\item Uhren müssen zuverlässig sein
+    
+    \begin{itemize}
+        \item Neue Transaktionen dürfen keinen Zeitstempel haben der geringer ist als die aktuelle Zeit
+    \end{itemize}
+\end{itemize}
+\subsection{Sicherheitsgefahren}
+\begin{itemize}
+	\item Zeit zurück setzen
+    \item Zeit anhalten
+    \item Uhr vorstellen
+\end{itemize}
+\subsection{Zuverlässige Uhr erstellen}
+mögliche Eingaben:
+\begin{itemize}
+	\item CPU Taktzyklen
+    \item letztes Runterfahren des System verfolgen
+    \item NTP/SNTP - authenticated NTP
+\end{itemize}
+Ptobleme:
+\begin{itemize}
+	\item Zeitzonen
+    \item Schaltsekunden
+\end{itemize}
+\subsection{Same State Problem}
+Jeder Rechner ohne Echtzeituhr startet bei jedem Bootvorgang in exakt demselben Zustand
+\begin{itemize}
+	\item Liest dieselben Programme
+    \item initalisiert dieselbe Hardware
+    \item Setzt denselben Startpunkt für den Zufallsgenerator
+    \item Wird dieselben Challenges in einem Challenge-Response Schema generieren
+\end{itemize}
+Lösungen:
+\begin{itemize}
+	\item Echtzeituhr
+    
+    \begin{itemize}
+        \item Probleme:
+        \item Manipulation
+        \item Strom
+    \end{itemize}
+    \item Rechner neustarten
+    
+    \begin{itemize}
+        \item Probleme:
+        \item Nichtflüchtiger aber beschreibbarer Speicher wird benötigt
+        \item Manipulation
+        \item Manche NVRAM sind beschränkt in der Menge der Schreiboperationen
+    \end{itemize}
+\end{itemize}
 \end{document}
