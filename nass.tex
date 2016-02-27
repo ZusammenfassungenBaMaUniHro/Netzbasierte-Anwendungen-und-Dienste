@@ -648,7 +648,7 @@ Aus Netzwerksicherheitstechnischer Sicht keine akzeptable Methode!
 Honeypots verhalten sich wie reale Systeme.\\
 Angreifer sollen nicht mitbekommen können, dass sie mit einem Honeypot interagieren.\\
 Honeypot zeichnet alle Nutzer/Client Handlungen auf.\\
-Admin möchte den Spuren eines Angreifers folgen.\\
+	Admin möchte den Spuren eines Angreifers folgen.\\
 Später folgt eine Analyse der Angriffsmuster.
 \subsection{Honeynets}
 Reale Systeme hinter einem Gateway beobachten alle Netzwerkaktivitäten.\\
@@ -672,6 +672,65 @@ Proof-of-work (POW) fügt einem Dienst einen Preis hinzu.\\
 ökonomische Maßnahme um DoS Angriffe oder Spam zu verhindern.\\
 benötigen für gewöhnlich Rechenzeit.\\
 Können als Nebenprodukt für praktische Rechenaufgaben benutzt werden (Jeder Sender einer Mail rechnet also ein kleines bisschen an einem Problem das eh gelöst werden soll weiter). 
+\section{VPN}
+	\begin{itemize}
+		\item Funkiton von VPN: Verbinden mindestens zweier Endpunkte bzw. mehrerer Netzwerke und zum Erstellen eines gemeinsamen Adressraumes.
+		\item Zwei Arten:
+			\begin{enumerate}
+			\item Host-to-Gateway: Einbindung von Remote-Nutzern
+			\item Gateway-to-Gateway: Aufbau eines verschlüsselten Tunnels zwischen den Gateways
+			\end{enumerate}
+		\end{itemize}
+\subsection{Host-to-Gateway Varianten}
+		\begin{itemize}
+		\item Voluntary tunneling
+			\begin{itemize}
+			\item Der Nutzer kann entscheiden, ob er via VPN auf eine Netzwerkressource zugreifen will oder nicht.
+			\item Vorteil: Bedeutet weniger Aufwand für das VPN-Gateway
+			\item Nachteil: Der Nutzer ist zeitgleich mit dem inneren und äußeren Netzwerk verbunden. Dadurch ist der Nutzer nicht durch die Sicherheitsmittel des inneren Netzwerks gesichert.
+			\end{itemize}
+		\item Compulsory tunneling
+			\begin{itemize}
+			\item Der gesamte Traffic wird durch das VPN-Gateway geforwarded.
+			\item Der Nutzer kann keine alternative Route nutzen.
+			\item Vorteil: Der Nutzer durch die Sicherheit um das innere Netzwerk gesichert ist
+			\item Nachteil: Das VPN-Gateway muss mehr Traffic verarbeiten
+			\end{itemize}		
+		\end{itemize}
+\subsection{Protokolle}
+	\begin{itemize}
+	\item Tunneling-Protokolle kapseln Protokolle ineinander. Das äußere arbeitet als Data-Link-Layer für das innere Protokoll.
+	\item Beispiele: L2TP, PPPoE, IPSec, 802.1Q, SSL / TLS
+	\end{itemize}
+\subsection{Angriffe gegen:}
+	\begin{itemize}
+	\item Verschlüsselte Pakete und Authentifizierung\\
+	\textit{(Erfordert Kryptoanalyse, Expertenwissen und die meisten Verschlüsselungsverfahren sind genau untersucht und können grundsätzlich als sicher angesehen werden)}
+	\item Client\\
+	\textit{(Angreifer wollen Zugriff erhalten, bevor die Daten verschlüsselt werden oder nachdem die Daten entschlüsselt wurden - Trojaner)}
+	\item Gateway\\
+	\textit{(Spoofing)}
+	\end{itemize}
+\subsection{Pro/Cons}
+Vorteile
+	\begin{itemize}
+	\item Sicherheit (Authentifizierung, Verschlüsselung)
+	\item Entwicklungsgeschwindigkeit (Es ist nicht nötig auf eine neue Leitung zu warten)
+	\item Kosten (Nutzung(Teilen) eines existierenden Netzwerks)
+	\end{itemize}
+Nachteile
+	\begin{itemize}
+	\item Overhead (Weiterer Arbeitsschritt, Tunneln, Entkapseln)
+	\item Implementation (VPN muss in eine existierende Struktur integriert werden)
+	\item Verschlüsselte Dateien können nicht gefiltert werden 
+	\end{itemize}
+\subsection{Design Entscheidungen}
+	\begin{itemize}
+	\item Jedes Paket muss authentifiziert sein, um Session Hijacking zu verhindern
+	\item Daten müssen vor der Verschlüsselung auf Integrität hin untersucht werden
+	\item VPN bewirkt keine Firewall-Funktionalität
+	\item Eine Firewall kann verschlüsselten Traffic nicht untersuchen
+	\end{itemize}
 \section{Public Key Infrastructure}
 %100_PKI.pdf
 Ziele/Zwecke von PKI:
