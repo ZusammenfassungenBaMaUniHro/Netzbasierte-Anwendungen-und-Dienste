@@ -528,20 +528,24 @@ Fehlende Infos ohne IDS:
     \item Mit welcher Methode wurde angegriffen?
 \end{itemize}
 Nachfolgende Schritte eines Angriffes können verhindert werden.
-\subsection{Methoden- Anomalieerkennung}
-Statistische Analyse um "`unnormalen"' Verkehr erkennen zu können.\\
-Parameter wie Herkunft, Datenrate, Ports und Zeit werden berücksichtigt und gegen eine Statistik geprüft, jedoch nicht nach bestimmten Mustern.\\
-Berechnung der Wahrscheinlichkeit dafür das Verkehr unnormal ist mithilfe von Bayesschen Filtern.\\
-Training der Filter mit Verkehr der als normal betrachtet wird.\\
-Wenn eine bestimmte Grenze überschritten wird, wird Alarm ausgelöst.\\
-
-\subsection{Methoden- Signaturerkennung}
-Analyse von Paketen anhand von gegebenen Mustern.\\
-Adressen und timing Pattern werden berücksichtigt.\\
-bestimmte Mustern lösen einen Alarm aus.
+\subsection{Methoden}
+\subsubsection{Anomalieerkennung}
+\begin{itemize}
+	\item Statistische Analyse um "`unnormalen"' Verkehr erkennen zu können.
+	\item Parameter wie Herkunft, Datenrate, Ports und Zeit werden berücksichtigt und gegen eine Statistik geprüft, jedoch nicht nach bestimmten Mustern.
+	\item Berechnung der Wahrscheinlichkeit dafür das Verkehr unnormal ist mithilfe von Bayesschen Filtern.
+	\item Training der Filter mit Verkehr der als normal betrachtet wird.
+	\item Wenn eine bestimmte Grenze überschritten wird, wird Alarm ausgelöst.
+\end{itemize}
+\subsubsection{Signaturerkennung}
+\begin{itemize}
+	\item Analyse von Paketen anhand von gegebenen Mustern.
+	\item Adressen und timing Pattern werden berücksichtigt.
+	\item bestimmte Mustern lösen einen Alarm aus.	
+\end{itemize}
 
 \subsection{Probleme mit IDS}
-Fehlalarme (false positives) und nicht erkannte Alarme (false negatives).\\
+Fehlalarme (false positives) und nicht erkannte Alarme (false negatives).
 \begin{itemize}
 	\item Viele Fehlalarme werden zu einer bedeutend höheren Ignoranz seitens des Admins führen.
     \item Reduzierung der false positives führt gewöhnlich zu mehr false negatives.
@@ -550,11 +554,9 @@ Fehlalarme (false positives) und nicht erkannte Alarme (false negatives).\\
     \item Spezifischere Untersuchung der Pakete die den ersten Filter durchlaufen haben.
 \end{itemize}
 \subsection{Ansätze für IDS}
-globale vs lokale Ansätze:
+Die Auflösung der Referenzmenge wird betrachtet, um ein bestimmtes Datenobjekt als Außenseiter zu erkennen.
 \begin{itemize}
-	\item betrachtet die Auflösung der Referenzmenge bezüglich ob ein bestimmtes Datenobjekt als Außenseiter erkannt wurde.
-    \item globale Ansätze:
-    
+    \item globale Ansätze:    
     \begin{itemize}
         \item Referenzmenge enthällt alle Daten.
         \item Basisannahme: es gibt nur einen normalen Mechanismus (normal mechanism?).
@@ -570,7 +572,23 @@ globale vs lokale Ansätze:
 \end{itemize}
 Einige Ansätze befinden sich irgendwo dazwischen.\\
 Die Auflösung der Referenzmenge kann automatisch oder durch eine Nutzereingabe verändert werden.
-\subsection{Statistische Tests}
+\subsection{Verfahren}
+\subsubsection{Überblick}
+	\begin{itemize}
+	\item Vergleich Labeling vs. Scoring
+		\begin{itemize}
+		\item Beim Labeling werden Objekte entweder als normal oder outlier eingeteilt.
+		\item Beim Scoring wird jedem Objekt ein Wert zugeordnet, der die Wahrscheinlichkeit angibt, ob es sich bei dem Objekt um einen Outlier handelt).
+		\end{itemize}
+	\item Modellbasiert
+		\begin{itemize}
+		\item Rational: Normale Datenpunkte werden durch dieses Modell repräsentiert - Outliers sind Punkte die davon abweichen
+		\item Ansatz der auf Proben basiert: Wahrscheinlichkeitstests, die auf statistischen Modellen basieren.
+		\end{itemize}
+	\item Nähebasiert
+	\item Winkelbasiert
+	\end{itemize}
+\subsubsection{Statistische Tests}
 Idee:
 \begin{itemize}
 	\item Gegebene Wahrscheinlichkeitsverteilung (z.B. Gauss)
@@ -583,10 +601,10 @@ Annahme:
     \item Ausreißer weichen stark von dieser Verteilung ab.
 \end{itemize}
 Viele verschiedene Tests (unterschiedliche Verteilung, Menge der Variablen, Menge der Verteilungen....)\\
-\subsection{Tiefenbasierte Ansätze}
+\subsubsection{Tiefenbasierte Ansätze}
 Idee:
 \begin{itemize}
-	\item Suche nach Ausreißern an den Grenzen des Datenraums aber unabhängig von Wahrscheinlichkeitsverteilungen.\\
+	\item Suche nach Ausreißern an den Grenzen des Datenraums aber unabhängig von Wahrscheinlichkeitsverteilungen.
     \item organisieren Daten in Schichten von konvexen Hüllen
     \item Ausreißer sind Objekte in äußeren Schichten.
 \end{itemize}
@@ -594,7 +612,11 @@ Annahme:
 \begin{itemize}
 	\item Ausreißer befinden sich an den Grenzen des Datenraums und normale Daten im Zentrum.
 \end{itemize}
-\subsection{Abweichungsbasierte Ansätze}
+\begin{center}
+	\includegraphics[width=10cm]{img/depth.png}
+\end{center}
+
+\subsubsection{Abweichungsbasierte Ansätze}
 Idee:
 \begin{itemize}
 	\item Gegeben: Menge von Datenpunkten
@@ -604,7 +626,7 @@ Annahme:
 \begin{itemize}
 	\item Ausreißer sind die äußersten Punkte der Datenmenge.
 \end{itemize}
-\subsection{Abstandsbasierte Ansätze}
+\subsubsection{Abstandsbasierte Ansätze}
 Idee:
 \begin{itemize}
 	\item Punkte werden basierend auf ihrem Abstand zu ihren Nachbarn bewertet. 
@@ -615,7 +637,12 @@ Annahme:
     \item Ausreißer sind weit von ihren Nachbarn entfernt.
 \end{itemize}
 Beispiel: k-Nearest-Neighbours
-\subsection{Dichtebasierte Ansätze}
+	\begin{itemize}
+	\item Man nehme die Summe der k nächste Nachbarn und nutze diese als Outlier-Score
+	\item Die Knoten mit einem geringen Score sind besser angebunden als die mit einem höheren
+	\item Höherer Score $\rightarrow$ Indiz für Outlier
+	\end{itemize}
+\subsubsection{Dichtebasierte Ansätze}
 Idee:
 \begin{itemize}
 	\item Vergleiche Dichte um einen Punkt mit der Dichte um seine lokalen Nachbarn
