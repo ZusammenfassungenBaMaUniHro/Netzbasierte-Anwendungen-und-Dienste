@@ -456,8 +456,9 @@ beste Vorgehensweise:
         \begin{itemize}
             \item kritische Daten und Systeme identifizieren
             \item normale Nutzung des Netzwerkes feststellen
+            \item Schnittstellen zu anderen Systemen
         \end{itemize}
-        \item aufschreiben
+        \item aufschreiben!
     \end{itemize}
     \item Funde kommunizieren
     
@@ -1095,13 +1096,13 @@ Wie organisiert man ein Organ um die Datensicherheit aufrechtzuerhalten?\\
 Technische Lösungen lassen sich einfach nach und nach verstehen, müssen jedoch in professioneller und sturkturierter Art und weiße angewandt werden um Datensicherheit zu garantieren.\\
 Komponenten eines "`Informationsecurity management system"'(ISMS):
 \begin{itemize}
-	\item Security Process
-    \item personnel
-    \item management principles
-    \item ressources
+	\item Sicherheitsprozess
+    \item Personal
+    \item Management Prinzipien
+    \item Ressourcen
 \end{itemize}
 Sicherheit ist kein Zustand, es ist ein Prozess\\
-Ein Sicherheitsprozess muss etabliert werden.
+Ein Sicherheitsprozess muss etabliert werden. Ziele sind: Weiterführung des Geschäfts, Verträge/Bedingungen erfüllen, Öffentliche Meinung zu Qualität $\rightarrow$ Reputation
 \subsection{Bedürfnisse}
 Verfügbarkeit\\
 Vertraulichkeit\\
@@ -1143,9 +1144,18 @@ Beantwortung folgender Fragen:
 	\item Welche Geschäftsprozesse gibt es in der Firma und in welchem Verhältnis stehen sie zu den Geschäftszielen?
     \item Welche Prozesse hängen von einer funktionierenden IT-Infrastruktur ab?
     \item Welche Daten sind sind teilweise wichtig und dadurch schützenswert und warum ist dies wichtig? (Kategorisierung)
+Schadens- und Schutzkategorien:
+\begin{center}
+	\includegraphics[width=16cm]{img/categories.png}
+\end{center}
 \end{itemize}
 \subsubsection{Richtlinien}
 siehe oben Kapitel Richtlinien!
+\subsection{Struktur der IS}
+
+\begin{center}
+	\includegraphics[width=18cm]{img/IS.png}
+\end{center}
 \subsection{IT Security Officer}
 Datensicherheit wird oft vernachlässigt und ist normalerweise nebensächlich im alltäglichen Geschäftsablauf.\\
 Wenn die Verantwortlichkeiten nicht klar getrennt werden, wird Datensicherheit schnell zu "`jemand anderen sein Problem"', deswegen muss ein ITSO ernannt werden.\\
@@ -1159,7 +1169,7 @@ Aufgaben:
     \item Einrichtung und Überwachung von Sicherheitsmaßnahmen.
     \item Projekte bezüglich der Datensicherheit koordinieren.
     \item Sicherheitsprobleme untersuchen
-    \item Bewusstseinsteigernde Maßnahmen veranlassen und koordinieren.
+    \item Bewusstseinssteigernde Maßnahmen veranlassen und koordinieren.
 \end{itemize}
 \subsubsection{Anforderungsprofil}
 Identifizierung mit den Datensicherheitszielen und Überblick über Aufgaben und Ziele der Firma.\\
@@ -1196,20 +1206,47 @@ mit den Grundschutzbuch arbeiten.\\
 		\includegraphics[width=8cm]{img/Grundschutz.JPG}
 	\label{fig:Grundschutz}
 \end{figure}
+\begin{itemize}
+	\item \textbf{Module}: Umfassende Aspekte der InformationsSicherheit, Sicherheit von Infrastruktur/IT-Systemen/Netzwerk/Anwendungen
+	\item \textbf{Angriffskategorien}: Basics, höhere Gewalt, Defizite der Organisation, menschliche Fehler, technisches Versagen, willkürliche
+	\item \textbf{Sicherheitsmaßnahmen}: Infrastruktur, Organisatorisch, Personell, Hard- und Software, Kommunikation, Planung für Eventualfälle
+\end{itemize}
 \subsection{Desaster}
 Ein seltenes, natürliches oder menschgemachtes, Ereignis, das die Tätigkeiten einer Gemeinschaft oder eines Betriebes so stört, dass erheblicher und koordinierter Aufwand nötigt ist um eine schnelle Wiederherstellung zu erreichen.
 \subsubsection{Kontinuitätsplanung}
 Lernen wie man mit Ereignissen umgeht, die so selten auftreten dass sie gemeinhin nicht als großes Risiko betrachtet werden.\\
 Diese Ereignisse sind riskant da sie ein hohes Schadenspotential besitzen.\\
-Risiko ist das Produkt aus potentiellen Schaden und der Eintrittswahrscheinlichkeit.\\
+Risiko ist das Produkt aus potentiellen Schaden und der Eintrittswahrscheinlichkeit.
+\subsubsection{Risiko}
+Risiko ist Schaden x Eintrittswahrscheinlichkeit.\\
+
+\noindent Unwahrscheinlich ($>$10 Jahre), \\
+möglich (1xJahr), \\
+wahrscheinlich (1xMonat),\\
+sehr wahrscheinlich(1xWoche oder öfter)
+
+
 \subsubsection{Auswirkungen}
 Verlust an Produktivität, Einkommen, Ansehen und öffentlichem Vertrauen, Wettbewerbsvorteilen.\\
 Verletzung von vertraglichen Bestimmungen\\
-Verletzung von gesetzlichen und behördlichen Bestimmungen.\\
+Verletzung von gesetzlichen und behördlichen Bestimmungen.
 \subsubsection{Plan für Desaster}
 Keine Verhinderung des Desasters, sondern verhindern von Überraschung und unorganisierter Reaktion.\\
 Organisations- und Meldestrukturen müssen etabliert werden bevor das Desaster die Firma überrascht.
-
+\subsubsection{Geschäftsfortführung}
+	\begin{enumerate}
+	\item Entwicklung einer Kontinuitätsplanung
+	\item Eine Analyse bezüglich des Einflusses auf das Geschäft durchführen
+	\item Recovery Strategie und einen Plan entwickeln
+		\begin{itemize}
+		\item Ziele definieren (Verantwortlichkeiten, Autoritäten)
+		\item Prioritäten
+		\item Ausführen und testen
+		\item Dokumentation (Abläufe, Wiederherstellungslösungen, Rollen und Aufgaben, Benachrichtigungen und Kommunikation, Wiederaufnahmepläne)
+		\end{itemize}
+	\item Plan testen
+	\item Plan aufrecht erhalten
+	\end{enumerate}
 \section{Computer Forensics}
 %140_Computer_Forensics.pdf
 Generell ist Forensik die Wissenschaft um Gerichtsprozesse zu unterstützen.\\
